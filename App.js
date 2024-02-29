@@ -1,20 +1,26 @@
+import styled from 'styled-components';
+import Navigation from './screens/Navigation';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createContext, useContext, useState } from 'react';
+
+const AppWrapper = styled.View`
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    background-color: #2b2535;
+`;
+
+export const UserContext = createContext(null);
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    const [user, setUser] = useState(-1);
+   
+    return (
+        <UserContext.Provider value={{user,setUser}}>
+            <AppWrapper>
+                <Navigation />
+                {/* <StatusBar/> */}
+            </AppWrapper>
+        </UserContext.Provider>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
